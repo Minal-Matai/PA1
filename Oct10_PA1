@@ -1,0 +1,164 @@
+'''
+Write a program that allows people to add, drop, and change a mod schedule (all 7 mods).
+
+Add functionality to loop this 7 times (or whatever for D/E blocks), and give an option to make 
+and display a full year schedule.
+
+'''
+'''
+mod2 = {
+    "A Block": "",
+    "B Block": "",
+    "C Block": "",
+    "D Block": "",
+    "E Block": ""
+}
+
+#parameters: a dictionary called schedule
+#returns: a schedule with an added class
+def add_class(schedule):
+    ...
+    return schedule
+
+#parameters: a dictionary called schedule
+#returns: a schedule with a changed, preexisting class
+def change_class(schedule):
+    ...
+    return schedule
+
+#parameters: a dictionary called schedule
+#returns: a schedule with a removed class
+def drop_class(schedule):
+    ...
+    return schedule
+
+#main function
+def main():
+    global mod2
+    
+    user_choice = input("What would you like to do?").lower()
+    valid_actions = ["add","drop","change","exit"]
+    while user_choice not in valid_actions:
+        print("Error. Please pick add, drop, change, or exit.")
+        user_choice = input("What would you like to do?").lower()
+    while user_choice != "exit":
+        #All your mod building functions should work like dictionary = func(dictionary)
+        if user_choice == "add":
+            mod2 = add_class(mod2)
+        elif user_choice == "drop":
+            mod2 = drop_class(mod2)
+        else:
+            mod2 = change_class(mod2)
+        user_choice = input("Anything else? ")
+        while user_choice not in valid_actions:
+            print("Error. Please pick add, drop, change, or exit.")
+            user_choice = input("Anything else? ").lower()
+    print("Thanks for stopping by!")
+
+main()
+'''
+import time
+
+mod2_classes = {
+        "A block": "Computer Science II",
+        "B block": "Global Studies II",
+        "C block": "Chemistry",
+        "D block": "Dance"
+    }
+
+def print_dict(mod2_classes):
+ for key in mod2_classes:
+        print(f"{key}: {mod2_classes[key]}")
+
+def add_class(mod2_classes,user_choice, class_choice):
+    mod2_classes[user_choice] = class_choice
+    print_dict(mod2_classes)
+    return mod2_classes
+
+def remove_class(mod2_classes, user_choice):
+    mod2_classes.pop(user_choice)
+    print_dict(mod2_classes)
+    return mod2_classes
+
+
+def change_class(mod2_classes, user_choice, class_choice):
+    mod2_classes[user_choice] = class_choice
+    print_dict(mod2_classes)
+    return mod2_classes
+
+def error_handle(valid_answers, user_choice):
+    while user_choice not in valid_answers:
+        user_choice = input(f"!Error! Please choose one of these options:{valid_answers} ").capitalize()
+    return user_choice
+
+
+def main():
+
+    loop_control = True
+    while loop_control:
+
+        print("Welcome to Mrs. Carroll's office for schedule requests!")
+
+        for i in range(3):
+            time.sleep(0.5)
+            print("loading...")
+
+        print("\nHere are your mod 2 classes at the moment:")
+        print_dict(mod2_classes)
+
+        correct_ans = ["Add", "Drop", "Change", "Exit"]
+        
+        time.sleep(2)
+        ans = input(f"\nHow would you like to change your schedule classes?\n{correct_ans} ").capitalize()
+        ans = error_handle(correct_ans, ans)
+        
+        
+        if ans != "Exit":
+
+            for i in range(3):
+                time.sleep(0.5)
+                print("processing...")
+
+            user_choice = input(f"What block would you like to {ans.lower()}? ").capitalize()
+
+            valid_classes = ["A block", "B block", "C block", "D block"]
+            
+            if ans=="Add":
+                while not user_choice.endswith("block"):
+                    user_choice = input(f"!Error! Please enter a valid class (e.g. A block, E block, etc.)").capitalize()
+
+                class_choice = input(f"What class would you like to {ans} to your schedule? ").capitalize()
+                for i in range(3):
+                    time.sleep(0.5)
+                    print("loading new schedule...")
+                add_class(mod2_classes, user_choice, class_choice)
+                print(f"\n~You have now added {class_choice} as your {user_choice}~")
+                loop_control = False
+
+            elif ans=="Drop":
+                user_choice = error_handle(valid_classes, user_choice)
+                remove_class(mod2_classes, user_choice)
+                for i in range(3):
+                    time.sleep(0.5)
+                    print("loading new schedule...")
+                print(f"\n~You have dropped your class for {user_choice}~")
+                loop_control = False
+
+            else:
+                user_choice = error_handle(valid_classes, user_choice)
+                class_choice = input(f"What class would you like to {ans} as your {user_choice}? ").capitalize()
+                for i in range(3):
+                    time.sleep(0.5)
+                    print("loading new schedule...")
+                change_class(mod2_classes, user_choice, class_choice)
+                print(f"\n~You have changed your {user_choice} to {class_choice}~")
+                loop_control = False
+
+            ans = input("Would you like to change anything else?").capitalize()
+            ans = error_handle(correct_ans, ans)
+            
+        else:
+            print("\n~Thanks for stopping by! Come again soon!~")
+            loop_control = False
+
+main()
