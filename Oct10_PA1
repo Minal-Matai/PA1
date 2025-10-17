@@ -57,11 +57,18 @@ def main():
 
 main()
 '''
+'''
+Sources
+- https://www.w3schools.com/python/ref_keyword_continue.asp
+
+Issues
+#Comma printing after Valid option... print statement
+'''
 import time
 
-evening_class = {""}
+evening_class = {"E block": "Free"}
 
-season1_dblock = {""}
+season1_dblock = {"D block": "Free"}
 
 mod1_classes = {
         "A block": "Co-curriculum",
@@ -75,7 +82,7 @@ mod2_classes = {
         "C block": "Chemistry Part 1"
     }
 
-season2_dblock = {""}
+season2_dblock = {"D block": "Free"}
 
 mod3_classes = {
         "A block": "English II Part 1",
@@ -95,28 +102,44 @@ mod5_classes = {
         "C block": "Global Studies II Part 3"
     }
 
-season3_dblock = {""}
+season3_dblock = {"D block": "Free"}
 
 mod6_classes = {
         "A block": "Latin III Part 3",
         "B block": "Math Part 3",
-        "C block": ""
+        "C block": "Free"
     }
 
 mod7_classes = {
-        "A block": "",
+        "A block": "Free",
         "B block": "Chemistry Part 3",
         "C block": "English II Part 3"
     }
 
 mod_schedule = [mod1_classes, mod2_classes, season1_dblock, mod3_classes, mod4_classes, mod5_classes, season2_dblock, mod6_classes, mod7_classes, season3_dblock, evening_class]
+mod_schedule_names = ["Mod 1", "Mod 2", "Fall D Block", "Mod 3", "Mod 4", "Mod 5", "Winter D Block", "Mod 6", "Mod 7", "Spring D Block", "Year-long Evening Class"]
+print_mod_schedule = [mod1_classes, season1_dblock, mod2_classes, season1_dblock, mod3_classes, season2_dblock, mod4_classes, season2_dblock, mod5_classes, season2_dblock, mod6_classes, season3_dblock, mod7_classes, season3_dblock, evening_class]
+print_mod_schedule_names = ["Mod 1", "Fall D Block", "Mod 2", "Fall D Block", "Mod 3", "Winter D Block", "Mod 4", "Winter D Block", "Mod 5", "Winter D Block", "Mod 6", "Spring D Block", "Mod 7", "Spring D Block", "Year-long Evening Class"]
 
 def print_dict(schedule):
  for i in range(3):
     time.sleep(0.5)
     print("loading schedule...")
+ print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
  for key in schedule:
-        print(f"\n{key}: {schedule[key]}")
+        print(f"{key}: {schedule[key]}")
+ print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+
+def print_schedule():
+    print("\nHere is your full mod schedule for this school year currently:\n")
+    for i in range(len(print_mod_schedule)):
+        name = print_mod_schedule_names[i]
+        time.sleep(0.5)
+        print(f"{name} class/classes")
+        a = print_mod_schedule[i]
+        for key in a:
+            print(f"{key}: {a[key]}")
+        print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 
 def add_class(schedule,user_block, user_class):
     schedule[user_block] = user_class
@@ -134,36 +157,116 @@ def change_class(schedule, user_block, user_class):
     print(f"\n~You have changed your {user_block} to {user_class}~")
     return schedule
 
-def schedule_error_handle(valid_answers, user_block, mod):
+def schedule_error_handle(user_block, mod):
     while user_block not in mod.keys():
-        user_block = input(f"!Error! Please choose one of these options:{valid_answers} ").capitalize()
+        user_block = input(f"!Error! Please choose one of the blocks stated in your mod above only: ").capitalize()
     return user_block
 
 def error_handle(valid_answer, user_input):
     while user_input not in valid_answer:
-        user_input = input(f"!Error! Please choose one of these options:{valid_answer} ").capitalize()
+        print("Valid options:", *valid_answer, sep =', ')
+        user_input = input(f"!Error! Please choose one of the options above: ").capitalize()
     return user_input
 
 
 def main():
 
-    print("Welcome to Mrs. Carroll's office for schedule requests!")
+    print("\nWelcome to Ms. Carroll's office for schedule requests!\n")
 
-    print("Here is your whole 7 mod schedule now: ")
-    #print_dict(mod_schedule)
+    print_schedule()
 
     for index in mod_schedule:
+
+        if index == mod1_classes:
+            print_dict(mod1_classes)
+            print("\nYou are not allowed to change or drop co-curriculum!")
+            continue
 
         loop_control = True
         while loop_control:
 
-            print(f"\nHere are your classes for {index} at the moment:\n")
+            i = mod_schedule.index(index)
+            print(f"\nHere is/are your class/classes for {mod_schedule_names[i]} at the moment:\n")
             print_dict(index)
+
+            time.sleep(2)
+
+            class_options = [
+    "Studio art",
+    "Programming for the visual arts",
+    "Photography",
+    "Acting skills",
+    "Audition techniques",
+    "Public speaking",
+    "English i",
+    "English ii",
+    "English iii",
+    "English iv",
+    "Ap english literature and composition",
+    "Comparative global studies i",
+    "Comparative global studies ii",
+    "U.s. history",
+    "Global justice capstone seminar",
+    "Presidential elections research seminar",
+    "Student life",
+    "Steam fundamentals",
+    "Engineering for robotics",
+    "Programming for robotics",
+    "Psychology of sport",
+    "Computer science",
+    "Biology",
+    "Chemistry",
+    "Physics",
+    "Ap biology",
+    "Ap chemistry",
+    "Ap physics c: mechanics",
+    "Environmental science",
+    "Forensic science",
+    "Kinesiology",
+    "Marine ecology",
+    "Algebra i",
+    "Algebra ii",
+    "Geometry",
+    "Precalculus",
+    "Calculus",
+    "Ap calculus ab",
+    "Ap calculus bc",
+    "Multivariable calculus",
+    "Linear algebra",
+    "Differential equations",
+    "Statistics",
+    "Ap statistics",
+    "French i",
+    "French ii",
+    "French iii",
+    "French iv",
+    "Latin i",
+    "Latin ii",
+    "Latin iii",
+    "Latin iv / ap latin",
+    "Classical mythology & etymology",
+    "Spanish i",
+    "Spanish ii",
+    "Spanish iii",
+    "Spanish iv",
+    "Ap spanish",
+    "Fall musical",
+    "Horse riding",
+    "Yearbook/newspaper",
+    "Winter musical",
+    "Weight training",
+    "Yoga",
+    "Mad aquatics",
+    "Tennis 101",
+    "Mad agility",
+    "Mad conditioning",
+    "Dance"
+]
 
             correct_ans = ["Add", "Drop", "Change", "No"]
             
-            time.sleep(2)
-            ans = input(f"\n Would you like to change your classes in this mod (if so, then how)?\n{correct_ans} ").capitalize()
+            print(f"\nValid options to alter schedule: {correct_ans[0]}, {correct_ans[1]}, {correct_ans[2]}, {correct_ans[3]}.")
+            ans = input("Would you like to change your classes in this mod (if so, choose desired valid option above)? ").capitalize()
             ans = error_handle(correct_ans, ans)
             
             if ans == "No":
@@ -176,31 +279,43 @@ def main():
                     time.sleep(0.5)
                     print("processing...")
 
-                user_choice = input(f"What block would you like to {ans.lower()}? ").capitalize()
-                valid_blocks = ["A block", "B block", "C block", "D block"]
-                user_choice = schedule_error_handle(valid_blocks, user_choice, index)
+                user_choice = input(f"\nWhat block would you like to {ans.lower()} in {mod_schedule_names[index]} (e.g. A block, C block, etc.)? ").capitalize()
+                valid_blocks = ["A block", "B block", "C block", "D block", "E block"]
+                user_choice = schedule_error_handle(user_choice, index)
                 
                 if ans=="Add":
-                    if index[user_choice] == "":
+                    if index[user_choice] == "Free":
                         class_choice = input(f"What class would you like to {ans} to your schedule? ").capitalize()
+                        error_handle(class_options, class_choice)
+                        index=add_class(index, user_choice, class_choice)
                     else:
-                        user_choice = input("Please enter a block that is empty")
-                    index=add_class(index, user_choice, class_choice)
+                        print(f"\nValid options to alter schedule: {correct_ans[0]}, {correct_ans[1]}, {correct_ans[2]}, {correct_ans[3]}.")
+                        ans = print("\n!Error! You are not able to add this block because it already has a class in it, please use a different command and only add a block if it is free block: ")
 
                 elif ans=="Drop":
-                    user_choice = error_handle(valid_blocks, user_choice)
+                    user_choice = schedule_error_handle(user_choice, index)
                     index = remove_class(index, user_choice)
                     
                 else:
                     class_choice = input(f"What class would you like to {ans} your {user_choice} to? ").capitalize()
+                    error_handle(class_options, class_choice)
                     index = change_class(index, user_choice, class_choice)
-            
-            right_answers = ["Yes", "No"]
-            done = input("\nWould you like to change anything else in your full mod 7 schedule? ").capitalize()
-            error_handle(right_answers, done)
-            if done == "Yes":
-                break
-            else:
-                print("Thanks for stopping by!")
+                
+        right_answers = ["Yes", "No"]
+        done = input("\nWould you like to change anything else in your full seven mod schedule? ").capitalize()
+        done = error_handle(right_answers, done)
+        if done == "Yes":
+            loop_control = False
+            continue
+        else:
+            print_schedule()
+            print("Thanks for stopping by!")
+            loop_control = False
+            break
                 
 main()
+
+
+
+
+
