@@ -4,67 +4,39 @@ Write a program that allows people to add, drop, and change a mod schedule (all 
 Add functionality to loop this 7 times (or whatever for D/E blocks), and give an option to make 
 and display a full year schedule.
 
-'''
-'''
-mod2 = {
-    "A Block": "",
-    "B Block": "",
-    "C Block": "",
-    "D Block": "",
-    "E Block": ""
-}
-
-#parameters: a dictionary called schedule
-#returns: a schedule with an added class
-def add_class(schedule):
-    ...
-    return schedule
-
-#parameters: a dictionary called schedule
-#returns: a schedule with a changed, preexisting class
-def change_class(schedule):
-    ...
-    return schedule
-
-#parameters: a dictionary called schedule
-#returns: a schedule with a removed class
-def drop_class(schedule):
-    ...
-    return schedule
-
-#main function
-def main():
-    global mod2
-    
-    user_choice = input("What would you like to do?").lower()
-    valid_actions = ["add","drop","change","exit"]
-    while user_choice not in valid_actions:
-        print("Error. Please pick add, drop, change, or exit.")
-        user_choice = input("What would you like to do?").lower()
-    while user_choice != "exit":
-        #All your mod building functions should work like dictionary = func(dictionary)
-        if user_choice == "add":
-            mod2 = add_class(mod2)
-        elif user_choice == "drop":
-            mod2 = drop_class(mod2)
-        else:
-            mod2 = change_class(mod2)
-        user_choice = input("Anything else? ")
-        while user_choice not in valid_actions:
-            print("Error. Please pick add, drop, change, or exit.")
-            user_choice = input("Anything else? ").lower()
-    print("Thanks for stopping by!")
-
-main()
-'''
-'''
 Sources
 - https://www.w3schools.com/python/ref_keyword_continue.asp
+- https://www.geeksforgeeks.org/python/print-lists-in-python-4-different-ways/
+- https://www.geeksforgeeks.org/python/python-list-index/
+
+Relflection ~~~
+
+Project description:
+-This code displays a student's full-seven mod schedule for the year, and allows them to cycle through each mod and choose to either change, add, or drop a class. The user of this code has
+a few parameters that they are required to complete for each input to make the schedule as realistic as possible (for example, a student can only add a block that is free and can only change 
+a class with the accepted list of classes from the course catalog). Once the user is done completing any changes for their schedule, the program returns the student's fully-updated mod schedule.
+This code utilizes dictionary methods and loops to accomplish the task. 
+
+What went well:
+-Displaying the full schedule and individual modules aesthetically.
+-Using and constructing basic helper functions to add, change, and drop.
+-Using loops to cycle through the option to change each module and giving the user the option to stop changing their schedule.
+
+What could be improved:
+-Making the variable names more specific to exactly what they do instead of assigning them to random things in a rush
+-Making the program grade-specific, outputting different schedules and offering different classes depending on the grade
+-Instead of allowing the user to choose any class from the catalog, changing the program to have specific classes for D block and evening class
+-Doing a more thorough job on the flow chart
+-Changing the program so it knows which mod co-curriculum is in so it doesn't change anything for it
+-Not having to ask the user what class they want to add if there's only one class in the dictionary (for example, the dictionary with D block and E block)
+
 
 Issues
 #Comma printing after Valid option... print statement
 '''
 import time
+
+#Defines dictionaries of each module/blocks at the start
 
 evening_class = {"E block": "Free"}
 
@@ -77,63 +49,66 @@ mod1_classes = {
     }
 
 mod2_classes = {
-        "A block": "Computer Science II",
-        "B block": "Global Studies II Part 1",
-        "C block": "Chemistry Part 1"
+        "A block": "Computer science",
+        "B block": "Global studies ii",
+        "C block": "Chemistry"
     }
 
 season2_dblock = {"D block": "Free"}
 
 mod3_classes = {
-        "A block": "English II Part 1",
-        "B block": "Math Part 1",
-        "C block": "Latin III Part 1"
+        "A block": "English ii",
+        "B block": "Algebra i",
+        "C block": "Latin iii"
     }
 
 mod4_classes = {
-        "A block": "Chemistry Part 2",
-        "B block": "Math Part 2",
-        "C block": "Global Studies II Part 2"
+        "A block": "Chemistry",
+        "B block": "Statistics",
+        "C block": "Global Studies ii"
     }
 
 mod5_classes = {
-        "A block": "Latin III Part 2",
-        "B block": "English II Part 2",
-        "C block": "Global Studies II Part 3"
+        "A block": "Latin iii",
+        "B block": "English ii",
+        "C block": "Global Studies ii"
     }
 
 season3_dblock = {"D block": "Free"}
 
 mod6_classes = {
-        "A block": "Latin III Part 3",
-        "B block": "Math Part 3",
+        "A block": "Latin iii",
+        "B block": "Precalculus",
         "C block": "Free"
     }
 
 mod7_classes = {
         "A block": "Free",
-        "B block": "Chemistry Part 3",
-        "C block": "English II Part 3"
+        "B block": "Chemistry",
+        "C block": "English ii"
     }
 
+#Stores dictionaries in a general list for user use and another list specifically meant for printing out dictionaries in a certain way
 mod_schedule = [mod1_classes, mod2_classes, season1_dblock, mod3_classes, mod4_classes, mod5_classes, season2_dblock, mod6_classes, mod7_classes, season3_dblock, evening_class]
 mod_schedule_names = ["Mod 1", "Mod 2", "Fall D Block", "Mod 3", "Mod 4", "Mod 5", "Winter D Block", "Mod 6", "Mod 7", "Spring D Block", "Year-long Evening Class"]
 print_mod_schedule = [mod1_classes, season1_dblock, mod2_classes, season1_dblock, mod3_classes, season2_dblock, mod4_classes, season2_dblock, mod5_classes, season2_dblock, mod6_classes, season3_dblock, mod7_classes, season3_dblock, evening_class]
 print_mod_schedule_names = ["Mod 1", "Fall D Block", "Mod 2", "Fall D Block", "Mod 3", "Winter D Block", "Mod 4", "Winter D Block", "Mod 5", "Winter D Block", "Mod 6", "Spring D Block", "Mod 7", "Spring D Block", "Year-long Evening Class"]
 
+#Uses for loops to print out an individual dictionary with dividers and calls for the mod name as a parameter
 def print_dict(schedule):
- for i in range(3):
-    time.sleep(0.5)
-    print("loading schedule...")
- print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
- for key in schedule:
-        print(f"{key}: {schedule[key]}")
- print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    for i in range(3):
+        time.sleep(0.5)
+        print("loading schedule...")
+    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    for key in schedule:
+            print(f"{key}: {schedule[key]}")
+    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
+#Uses a for loop to define each dictionary in the list and then individually prints out those dictionaries and calls for no parameters
 def print_schedule():
     print("\nHere is your full mod schedule for this school year currently:\n")
-    for i in range(len(print_mod_schedule)):
-        name = print_mod_schedule_names[i]
+    for i in range(len(print_mod_schedule)): 
+        name = print_mod_schedule_names[i] #In this for loop, i has to be defined as a number to also print out the schedule names
         time.sleep(0.5)
         print(f"{name} class/classes")
         a = print_mod_schedule[i]
@@ -141,42 +116,49 @@ def print_schedule():
             print(f"{key}: {a[key]}")
         print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 
-def add_class(schedule,user_block, user_class):
-    schedule[user_block] = user_class
+#Adds a new class to a schedule using the dictionary index method and requires the mod name, the specific block (has to be a free block), and class the user wants to add
+def add_class(mod,user_block, user_class):
+    mod[user_block] = user_class
     print(f"\n~You have now added {user_class} as your {user_block}~")
-    return schedule
+    return mod
 
-def remove_class(schedule, user_block):
-    schedule.pop(user_block)
+#Removes a class from a module using the pop method and requires the mod name and the specific block from the user
+def remove_class(mod, user_block):
+    mod.pop(user_block)
     print(f"\n~You have dropped your class for {user_block}~\n")
-    return schedule
+    return mod
 
-
-def change_class(schedule, user_block, user_class):
-    schedule[user_block] = user_class
+#Changes a class using the same method as add, except user chooses the mod name, a block that is already there, and the class the user wants to change it to
+def change_class(mod, user_block, user_class):
+    mod[user_block] = user_class
     print(f"\n~You have changed your {user_block} to {user_class}~")
-    return schedule
+    return mod
 
+#Handles errors in dictionaries, specifically for the add function, ensuring that there are free blocks the user can add to in the mod, and if not then giving an error message. 
+#Requires the specific block and mod name as parameters
 def schedule_error_handle(user_block, mod):
     while user_block not in mod.keys():
         user_block = input(f"!Error! Please choose one of the blocks stated in your mod above only: ").capitalize()
     return user_block
 
+#Handles any errors for user input that does not contain the specific answers needed to alter the schedule.
 def error_handle(valid_answer, user_input):
     while user_input not in valid_answer:
         print("Valid options:", *valid_answer, sep =', ')
-        user_input = input(f"!Error! Please choose one of the options above: ").capitalize()
+        user_input = input(f"\n!Error! Please choose one of the options above: \n").capitalize()
     return user_input
 
 
 def main():
 
     print("\nWelcome to Ms. Carroll's office for schedule requests!\n")
-
+    #Prints full schedule
     print_schedule()
 
+    #Iterates code for each mod in the schedule
     for index in mod_schedule:
-
+        
+        #Exits out of code if mod 1 is co-curriculum
         if index == mod1_classes:
             print_dict(mod1_classes)
             print("\nYou are not allowed to change or drop co-curriculum!")
@@ -185,91 +167,31 @@ def main():
         loop_control = True
         while loop_control:
 
-            i = mod_schedule.index(index)
-            print(f"\nHere is/are your class/classes for {mod_schedule_names[i]} at the moment:\n")
-            print_dict(index)
+            name_count = mod_schedule.index(index)
+            print(f"\nHere is/are your class/classes for {mod_schedule_names[name_count]} at the moment:\n") #Prints name of mod
+
+            print_dict(index) #Prints mod
 
             time.sleep(2)
 
-            class_options = [
-    "Studio art",
-    "Programming for the visual arts",
-    "Photography",
-    "Acting skills",
-    "Audition techniques",
-    "Public speaking",
-    "English i",
-    "English ii",
-    "English iii",
-    "English iv",
-    "Ap english literature and composition",
-    "Comparative global studies i",
-    "Comparative global studies ii",
-    "U.s. history",
-    "Global justice capstone seminar",
-    "Presidential elections research seminar",
-    "Student life",
-    "Steam fundamentals",
-    "Engineering for robotics",
-    "Programming for robotics",
-    "Psychology of sport",
-    "Computer science",
-    "Biology",
-    "Chemistry",
-    "Physics",
-    "Ap biology",
-    "Ap chemistry",
-    "Ap physics c: mechanics",
-    "Environmental science",
-    "Forensic science",
-    "Kinesiology",
-    "Marine ecology",
-    "Algebra i",
-    "Algebra ii",
-    "Geometry",
-    "Precalculus",
-    "Calculus",
-    "Ap calculus ab",
-    "Ap calculus bc",
-    "Multivariable calculus",
-    "Linear algebra",
-    "Differential equations",
-    "Statistics",
-    "Ap statistics",
-    "French i",
-    "French ii",
-    "French iii",
-    "French iv",
-    "Latin i",
-    "Latin ii",
-    "Latin iii",
-    "Latin iv / ap latin",
-    "Classical mythology & etymology",
-    "Spanish i",
-    "Spanish ii",
-    "Spanish iii",
-    "Spanish iv",
-    "Ap spanish",
-    "Fall musical",
-    "Horse riding",
-    "Yearbook/newspaper",
-    "Winter musical",
-    "Weight training",
-    "Yoga",
-    "Mad aquatics",
-    "Tennis 101",
-    "Mad agility",
-    "Mad conditioning",
-    "Dance"
-]
+            class_options = ["Studio art", "Programming for the visual arts", "Photography", "Acting skills", "Audition techniques", "Public speaking", "English i", "English ii", "English iii", 
+                             "English iv", "Ap english literature and composition", "Comparative global studies i", "Comparative global studies ii", "U.s. history", "Global justice capstone seminar", 
+                             "Presidential elections research seminar", "Student life", "Steam fundamentals", "Engineering for robotics","Programming for robotics","Psychology of sport","Computer science",
+                             "Biology","Chemistry","Physics", "Ap biology", "Ap chemistry", "Ap physics c: mechanics", "Environmental science", "Forensic science", "Kinesiology", "Marine ecology",
+                             "Algebra i", "Algebra ii", "Geometry","Precalculus","Calculus","Ap calculus ab","Ap calculus bc","Multivariable calculus","Linear algebra","Differential equations",
+                             "Statistics","Ap statistics","French i","French ii","French iii","French iv","Latin i","Latin ii","Latin iii","Latin iv / ap latin","Classical mythology & etymology","Spanish i",
+                             "Spanish ii","Spanish iii","Spanish iv","Ap spanish","Fall musical","Horse riding","Yearbook/newspaper","Winter musical","Weight training","Yoga","Mad aquatics","Tennis 101",
+                             "Mad conditioning","Dance"
+                            ]
 
             correct_ans = ["Add", "Drop", "Change", "No"]
             
-            print(f"\nValid options to alter schedule: {correct_ans[0]}, {correct_ans[1]}, {correct_ans[2]}, {correct_ans[3]}.")
+            print(f"\nValid options to alter schedule: {correct_ans[0]}, {correct_ans[1]}, {correct_ans[2]}, or {correct_ans[3]}")
+            #Collects data for how user would like to change their schedule
             ans = input("Would you like to change your classes in this mod (if so, choose desired valid option above)? ").capitalize()
             ans = error_handle(correct_ans, ans)
             
-            if ans == "No":
+            if ans == "No": #Addresses user not wanting to alter their mod
                 print("\n~No other changes will be done to this mod!~")
                 loop_control = False
 
@@ -279,30 +201,34 @@ def main():
                     time.sleep(0.5)
                     print("processing...")
 
-                user_choice = input(f"\nWhat block would you like to {ans.lower()} in {mod_schedule_names[index]} (e.g. A block, C block, etc.)? ").capitalize()
-                valid_blocks = ["A block", "B block", "C block", "D block", "E block"]
+                #Asks what block
+                user_choice = input(f"\nWhat block would you like to {ans.lower()} in {mod_schedule_names[name_count]} (e.g. A block, C block, etc.)? ").capitalize()
                 user_choice = schedule_error_handle(user_choice, index)
                 
+                #Code for if user wants to add a class
                 if ans=="Add":
+                    #Checks if it is a free block
                     if index[user_choice] == "Free":
                         class_choice = input(f"What class would you like to {ans} to your schedule? ").capitalize()
-                        error_handle(class_options, class_choice)
+                        class_choice = error_handle(class_options, class_choice)
                         index=add_class(index, user_choice, class_choice)
                     else:
-                        print(f"\nValid options to alter schedule: {correct_ans[0]}, {correct_ans[1]}, {correct_ans[2]}, {correct_ans[3]}.")
-                        ans = print("\n!Error! You are not able to add this block because it already has a class in it, please use a different command and only add a block if it is free block: ")
+                        print("\n!Error! You are not able to add this block because it already has a class in it, please use a different command and only add a block if it is free block: ")
 
+                #Code for if user wants to drop a class
                 elif ans=="Drop":
                     user_choice = schedule_error_handle(user_choice, index)
                     index = remove_class(index, user_choice)
-                    
+
+                #Code for if user wants to change a class   
                 else:
                     class_choice = input(f"What class would you like to {ans} your {user_choice} to? ").capitalize()
-                    error_handle(class_options, class_choice)
+                    class_choice = error_handle(class_options, class_choice)
                     index = change_class(index, user_choice, class_choice)
                 
+        #Asks user if they want to change anything else in their full schedule
         right_answers = ["Yes", "No"]
-        done = input("\nWould you like to change anything else in your full seven mod schedule? ").capitalize()
+        done = input("\nWould you like to change anything else in your full seven mod schedule (yes or no)? ").capitalize()
         done = error_handle(right_answers, done)
         if done == "Yes":
             loop_control = False
