@@ -1,8 +1,4 @@
 '''
-Write a program that allows people to add, drop, and change a mod schedule (all 7 mods).
-
-Add functionality to loop this 7 times (or whatever for D/E blocks), and give an option to make 
-and display a full year schedule.
 
 Sources
 - https://www.w3schools.com/python/ref_keyword_continue.asp
@@ -34,58 +30,47 @@ What could be improved:
 Issues
 #Comma printing after Valid option... print statement
 '''
+
+#Setting up a version of PA1 that uses files instead of dictionaries
+
 import time
 
 #Defines dictionaries of each module/blocks at the start
 
-evening_class = {"E block": "Free"}
+evening_class = {}
 
-season1_dblock = {"D block": "Free"}
+season1_dblock = {}
 
 mod1_classes = {
-        "A block": "Co-curriculum",
-        "B block": "Co-curriculum",
-        "C block": "Co-curriculum"
+       
     }
 
 mod2_classes = {
-        "A block": "Computer science",
-        "B block": "Global studies ii",
-        "C block": "Chemistry"
+        
     }
 
-season2_dblock = {"D block": "Free"}
+season2_dblock = {}
 
 mod3_classes = {
-        "A block": "English ii",
-        "B block": "Algebra i",
-        "C block": "Latin iii"
+       
     }
 
 mod4_classes = {
-        "A block": "Chemistry",
-        "B block": "Statistics",
-        "C block": "Global Studies ii"
+        
     }
 
 mod5_classes = {
-        "A block": "Latin iii",
-        "B block": "English ii",
-        "C block": "Global Studies ii"
+        
     }
 
-season3_dblock = {"D block": "Free"}
+season3_dblock = {}
 
 mod6_classes = {
-        "A block": "Latin iii",
-        "B block": "Precalculus",
-        "C block": "Free"
+       
     }
 
 mod7_classes = {
-        "A block": "Free",
-        "B block": "Chemistry",
-        "C block": "English ii"
+        
     }
 
 #Stores dictionaries in a general list for user use and another list specifically meant for printing out dictionaries in a certain way
@@ -240,8 +225,3 @@ def main():
             break
                 
 main()
-
-
-
-
-
