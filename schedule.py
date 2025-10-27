@@ -1,5 +1,4 @@
 
-
 my_schedule = open("schedule.txt")
 
 print(my_schedule)
@@ -8,10 +7,11 @@ print(my_schedule)
 
 #print(my_schedule.read(3)) #if you put a number in the (), it prints out that num of charecteristics from the file
 
+'''
 print(my_schedule.readline()) #Prints out a full line of the file
 
-my_schedule.readline()
+my_schedule.readline() #Without printing, just moves the cursur/position in the file
 print(my_schedule.read(3))
-
+'''
 
 

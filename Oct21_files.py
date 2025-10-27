@@ -13,6 +13,7 @@ To create a new file in python, just open one that doesn't exist in an edit mode
 new_file = open("new_file.txt","w") #just creates new file
 new_file.write("HI")
 
+new_file.write("HI")
 '''
 line = my_schedule.readline()
 

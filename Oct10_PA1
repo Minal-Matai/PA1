@@ -169,7 +169,7 @@ def main():
                              "Mad conditioning","Dance"
                             ]
 
-            correct_ans = ["Add", "Drop", "Change", "No"]
+            correct_ans = ["Add", "Drop", "Change", "No"] 
             
             print(f"\nValid options to alter schedule: {correct_ans[0]}, {correct_ans[1]}, {correct_ans[2]}, or {correct_ans[3]}")
             #Collects data for how user would like to change their schedule
